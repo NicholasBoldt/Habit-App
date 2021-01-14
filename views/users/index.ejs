@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <!-- Add login UI here -->
+    <% if (user) { %>
+        <nav>
+            <h2><a href= "/users">Home</a></h2> <h2><a href= "/users/habits">Habits</a> <h2><a href= "/users/tasks">Tasks</a></h2> <h2><a href= "/users/all">All</a>
+        </nav> 
+        <h1>Habit App</h1>
+        User: <%= user.name %> <br>
+          <% user.roles.forEach(function(role) { %>
+              <li> <a href="/users/role/<%= role._id %>"> <%= role.name %> </a></li>
+          <% }) %>
+
+
+          <a href="/logout">Log Out</a> <br>
+      
+      <% } else { %>
+        <h1>Habit App</h1>
+          <a href="/auth/google">Login with Google</a>
+      <% } %>
+      
+  
+  
+      <% if (user && user._id) { %>
+          <div class="card-action">
+            <form action="/users" method="POST">
+              <input type="text" name="name" class="white-text">
+              <button type="submit" class="btn white-text">Add Role</button>
+            </form>
+          </div>
+
+          <div class="card-action">
+            <form action="/users/reset?_method=PUT"  
+             method="POST">
+              <button type="submit">Reset Habits</button>
+            </form>
+        </div>
+        <% } %>
+</body>
+</html>
+

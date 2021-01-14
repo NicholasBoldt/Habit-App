@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <nav>
+        <h2><a href= "/users">Home</a></h2> <h2><a href= "/users/habits">Habits</a> <h2><a href= "/users/tasks">Tasks</a></h2> <h2><a href= "/users/all">All</a>
+    </nav> 
+    <div>
+        <h1>All Habits</h1>
+        <% person.roles.forEach(function(role) { %>
+            <%  if(role.habits.length > 0 && role.habits != undefined){ %>
+                <h3><%= role.name %></h3>
+                <%  } %>
+            <% role.habits.forEach(function(habit) { %>
+                <li><%= habit.name %>: <%= habit.amount %> <%= habit.daily %> </input>
+                    <a href="/users/habit/<%= habit._id %>"> edit </a>
+                    <% if(habit.completed == true) { %>
+                        <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT"  
+                            method="POST">
+                            <button type="submit"> Finished </button>
+                       </form>
+                    <% } else { %>
+                        <form action="/users/habit/complete/<%= habit._id %>?_method=PUT"  
+                            method="POST">
+                            <button type="submit"> Complete </button>
+                       </form>
+                    <% }  %> </li>
+           <% }); %>
+        <% }); %>
+    </div>
+
+</body>
+</html>
