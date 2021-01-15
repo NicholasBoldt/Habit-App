@@ -29,36 +29,37 @@
             </div>
         </div>
       </nav>
-    <div>
-        <h1>All Habits</h1>
-        <% person.roles.forEach(function(role) { %>
-            <%  if(role.habits.length > 0 && role.habits != undefined){ %>
-                <h3><%= role.name %></h3>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <h1 class="text-center"><u>All Habits</u></h1>
+                <% person.roles.forEach(function(role) { %>
+                <%  if(role.habits.length > 0 && role.habits != undefined){ %>
+                <h3 class="mt-4"><%= role.name %></h3>
                 <%  } %>
-            <ul>
-            <% role.habits.forEach(function(habit) { %>
-                <li>  
-                    <div> <%= habit.name %>: </div>
-                    <div> <%= habit.amount %> </div>
-                    <div> <%= habit.daily %> </div>
-                    <div><a href="/users/habit/<%= habit._id %>"> edit </a></div>
-                    <div>
-                        <% if(habit.completed == true) { %>
-                            <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT"  
-                                method="POST">
-                                <button type="submit"> Complete </button>
-                           </form>
-                        <% } else { %>
-                            <form action="/users/habit/complete/<%= habit._id %>?_method=PUT"  
-                                method="POST">
-                                <button type="submit"> Incomplete </button>
-                           </form>
-                        <% }  %>
-                    </div>
-                </li>
-           <% }); %>
-        <% }); %>
-        </ul>
+                <ul class="list-group list-group-flush">
+                    <% role.habits.forEach(function(habit) { %>
+                    <a href="/users/habit/<%= habit._id %>" class="list-group-item list-group-item-action d-flex justify-content-between">
+                        <div> <%= habit.name %>: <%= habit.amount %> <%= habit.daily %> </div>
+                        <div>
+                            <% if(habit.completed == true) { %>
+                            <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT" method="POST">
+                                <button type="submit" class="btn btn-success btn-sm"> Complete </button>
+                            </form>
+                            <% } else { %>
+                            <form action="/users/habit/complete/<%= habit._id %>?_method=PUT" method="POST">
+                                <button type="submit" class="btn btn-secondary btn-sm"> Incomplete </button>
+                            </form>
+                            <% }  %>
+                        </div>
+                    </a>
+                        <% }); %>
+                        <% }); %>
+                </ul>
+            </div>
+            <div class="col"></div>
+        </div>
     </div>
 
 </body>
