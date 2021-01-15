@@ -3,81 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
+    <title>Role</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 
 <body>
-    <nav>
-        <h2><a href= "/users">Home</a></h2> <h2><a href= "/users/habits">Habits</a> <h2><a href= "/users/tasks">Tasks</a></h2> <h2><a href= "/users/all">All</a>
-    </nav> 
-    <h1><%= role.name %></h1>  
-    <h3>Habits</h3>
-    <% role.habits.forEach(function(habit) { %>
-        <li>  <%= habit.name %> <%= habit.amount %>
-            <%= habit.daily %> 
-            <a href="/users/habit/<%= habit._id %>"> edit </a>
-            <% if(habit.completed == true) { %>
-                <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT"  
-                    method="POST">
-                    <button type="submit"> Finished </button>
-               </form>
-            <% } else { %>
-                <form action="/users/habit/complete/<%= habit._id %>?_method=PUT"  
-                    method="POST">
-                    <button type="submit"> Complete </button>
-               </form>
-            <% }  %>
-           
-                <form action="/users/habit/delete/<%= habit._id %>?_method=DELETE"  
-                    class="delete-form" method="POST">
-                  <button type="submit"> Delete Habit</button>
-                </form> </li>
-    <% }) %>
+      <nav class="navbar navbar-dark bg-dark mb-3">
+        <div class="container-fluid">
+          <a href="#" class="navbar-brand mr-3">Habit App</a>
+            <div class="navbar-nav">
+              <a href="/users" class="nav-item nav-link">Home</a>
+            </div>
+            <div class="navbar-nav">
+              <a href="/users/habits" class="nav-item nav-link">Habits</a>
+            </div>
+            <div class="navbar-nav">
+              <a href="/users/tasks" class="nav-item nav-link">Tasks</a>
+            </div>
+            <div class="navbar-nav">
+              <a href="/users/all" class="nav-item nav-link">All</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+              <a href="/logout" class="nav-item nav-link">Logout</a>
+            </div>
+        </div>
+      </nav>
 
-    <div>
-        <form action="/users/habit/new/<%= role._id %>" method="POST">   
-            <label>Name
-                <input type="text" name="habitName" >
-            </label> <br>
-            <label>Amount
-                <input type="text" name="habitAmount" >
-            </label><br>
-            <select name="habitDaily">
-                <option value="daily">Daily</option>
-                <option value="weekly">Weekly</option>
-            </select><br>
-          <button type="submit">Add Habit</button>
-        </form>
-    </div>
+    <div class="container">
+        <div class=row>
+            <div class="col"></div>
+            <div class="col-sm-10 col-md-6 col-lg-6">
+                <h1 class="text-center"><u><%= role.name %></u></h1>
+                <h3>Habits</h3>
+                <% role.habits.forEach(function(habit) { %>
+                <ul class="list-group list-group-flush">
+                    <a href="/users/habit/<%= habit._id %>" class="list-group-item list-group-item-action d-flex"> 
+                        <%= habit.name %> <%= habit.amount %> <%= habit.daily %> 
+                        <% if(habit.completed == true) { %>
+                        <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT" method="POST">
+                            <button type="submit" class="btn btn-success btn-sm"> Complete </button>
+                        </form>
+                        <% } else { %>
+                        <form action="/users/habit/complete/<%= habit._id %>?_method=PUT" method="POST">
+                            <button type="submit" class="btn btn-secondary btn-sm"> Incomplete </button>
+                        </form>
+                        <% }  %>
+                
+                        <form action="/users/habit/delete/<%= habit._id %>?_method=DELETE" class="delete-form" method="POST">
+                            <button type="submit" class="btn btn-danger btn-sm"> Delete Habit</button>
+                        </form>
+                    </a>
+                    <% }) %>
+                </ul>
+                
     
-
-    <h3>Tasks</h3>
-    <% role.tasks.forEach(function(task) { %>
-        <li>  <%= task.name %> 
-                <form action="/users/task/delete/<%= task._id %>?_method=DELETE"  
-                    class="delete-form" method="POST">
-                  <button type="submit"> Complete Task</button>
-                </form> </li>
-    <% }); %>
-    <div>
-        <form action="/users/task/new/<%= role._id %>" method="POST">   
-            <label>Name
-                <input type="text" name="taskName">
-            </label> <br>
-          <button type="submit">Add Task</button>
-        </form>
+                <div>
+                    <form action="/users/habit/new/<%= role._id %>" method="POST">
+                        <label>Name
+                            <input type="text" name="habitName">
+                        </label> <br>
+                        <label>Amount
+                            <input type="text" name="habitAmount">
+                        </label><br>
+                        <select name="habitDaily">
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                        </select><br>
+                        <button type="submit" class="btn btn-primary btn-block">Add Habit</button>
+                    </form>
+                </div>
+    
+    
+                <h3>Tasks</h3>
+                <% role.tasks.forEach(function(task) { %>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex"> <%= task.name %>
+                    <form action="/users/task/delete/<%= task._id %>?_method=DELETE" class="delete-form" method="POST">
+                        <button type="submit" class="btn btn-secondary btn-sm"> Complete Task</button>
+                    </form>
+                </li>
+                <% }); %>
+                </ul>
+                <div>
+                    <div>
+                        <form action="/users/task/new/<%= role._id %>" method="POST">
+                            <label>Name
+                                <input type="text" name="taskName">
+                            </label> <br>
+                            <button type="submit" class="btn btn-primary ">Add Task</button>
+                        </form>
+                    </div>
+                
+                    <div class="card-action">
+                        <form action="/users/delete/<%= role._id %>?_method=DELETE" class="delete-form" method="POST">
+                            <button type="submit" class="btn btn-danger">Delete Role</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
     </div>
-
-    <div class="card-action">
-        <form action="/users/delete/<%= role._id %>?_method=DELETE"  
-            class="delete-form" method="POST">
-          <button type="submit">Delete Role</button>
-        </form>
-    </div>
-
 </body>
 </html>
 

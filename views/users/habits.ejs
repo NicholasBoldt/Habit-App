@@ -3,35 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Habits</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-    <nav>
-        <h2><a href= "/users">Home</a></h2> <h2><a href= "/users/habits">Habits</a> <h2><a href= "/users/tasks">Tasks</a></h2> <h2><a href= "/users/all">All</a>
-    </nav> 
+      <nav class="navbar navbar-dark bg-dark mb-3">
+        <div class="container-fluid">
+          <a href="#" class="navbar-brand mr-3">Habit App</a>
+            <div class="navbar-nav">
+              <a href="/users" class="nav-item nav-link">Home</a>
+            </div>
+            <div class="navbar-nav">
+              <a href="/users/habits" class="nav-item nav-link active">Habits</a>
+            </div>
+            <div class="navbar-nav">
+              <a href="/users/tasks" class="nav-item nav-link">Tasks</a>
+            </div>
+            <div class="navbar-nav">
+              <a href="/users/all" class="nav-item nav-link">All</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+              <a href="/logout" class="nav-item nav-link">Logout</a>
+            </div>
+        </div>
+      </nav>
     <div>
         <h1>All Habits</h1>
         <% person.roles.forEach(function(role) { %>
             <%  if(role.habits.length > 0 && role.habits != undefined){ %>
                 <h3><%= role.name %></h3>
                 <%  } %>
+            <ul>
             <% role.habits.forEach(function(habit) { %>
-                <li><%= habit.name %>: <%= habit.amount %> <%= habit.daily %> </input>
-                    <a href="/users/habit/<%= habit._id %>"> edit </a>
-                    <% if(habit.completed == true) { %>
-                        <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT"  
-                            method="POST">
-                            <button type="submit"> Finished </button>
-                       </form>
-                    <% } else { %>
-                        <form action="/users/habit/complete/<%= habit._id %>?_method=PUT"  
-                            method="POST">
-                            <button type="submit"> Complete </button>
-                       </form>
-                    <% }  %> </li>
+                <li>  
+                    <div> <%= habit.name %>: </div>
+                    <div> <%= habit.amount %> </div>
+                    <div> <%= habit.daily %> </div>
+                    <div><a href="/users/habit/<%= habit._id %>"> edit </a></div>
+                    <div>
+                        <% if(habit.completed == true) { %>
+                            <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT"  
+                                method="POST">
+                                <button type="submit"> Complete </button>
+                           </form>
+                        <% } else { %>
+                            <form action="/users/habit/complete/<%= habit._id %>?_method=PUT"  
+                                method="POST">
+                                <button type="submit"> Incomplete </button>
+                           </form>
+                        <% }  %>
+                    </div>
+                </li>
            <% }); %>
         <% }); %>
+        </ul>
     </div>
 
 </body>
