@@ -80,7 +80,7 @@
                 <h3>Tasks</h3>
                 <% role.tasks.forEach(function(task) { %>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex"> <%= task.name %>
+                    <li class="list-group-item d-flex justify-content-between"> <%= task.name %>
                     <form action="/users/task/delete/<%= task._id %>?_method=DELETE" class="delete-form" method="POST">
                         <button type="submit" class="btn btn-secondary btn-sm"> Complete Task</button>
                     </form>
