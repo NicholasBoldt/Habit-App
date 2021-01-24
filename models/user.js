@@ -4,7 +4,8 @@ var habitSchema = new mongoose.Schema({
     name: String,
     amount: String,
     daily: String,
-    completed: {type: Boolean, default: false}
+    completed: {type: Boolean, default: false},
+    completed_dates: [Date], // to calculate streak
 });
 
 var taskSchema = new mongoose.Schema({

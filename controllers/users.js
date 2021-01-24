@@ -97,10 +97,30 @@ function habitDetail(req, res, next) {
     req.user.roles.forEach(function(role) {
         role.habits.forEach(function(habit) {
             if(habit.id == req.params.id) {
-                res.render('users/habit', {role, habit});
+                res.render('users/habit', {
+                    role, 
+                    habit, 
+                    streak: calculateStreak(habit.completed_dates)
+                });
             }
         });
     });
+}
+
+function calculateStreak(dates) {
+    let current_date = new Date()
+    current_date.setHours(0,0,0,0)
+    let streak = 0
+    for (let i = dates.length -1; i >= 0; i--) {
+        console.log(i, dates[i], current_date)
+        while(i >= 0 && dates[i].getTime() == current_date.getTime()) {
+            console.log("match at index",i)
+            streak++
+            i--
+            current_date.setDate(current_date.getDate() - 1)
+        }
+    }
+    return Math.max(0, streak);
 }
 
 function editHabit(req, res, next) {
@@ -127,9 +147,25 @@ function completeHabit(req, res, next) {
         role.habits.forEach(function(habit) {
             const idx = role.habits.findIndex(habit => habit.id === req.params.id);
             if(habit.id === req.params.id) {
-                roleID = role.id;
                 console.log(habit.completed);
                 habit.completed = true;
+
+                // Add today's date to a list of completed_dates (if today isn't already there)
+                // warning: these dates are all local server time. ideal:UTC
+                let today = new Date()
+                today.setHours(0,0,0,0)
+                date_exists_in_log = habit.completed_dates.some(date_in_log => date_in_log.getTime() == today.getTime())
+                if (!date_exists_in_log) {
+                    habit.completed_dates.push(today);
+                }
+                // Reset "completion" flag to false at midnight
+                let milliseconds_to_midnight = (new Date()).setHours(24,0,0,0) - new Date()
+                console.log(milliseconds_to_midnight)
+                setTimeout(async function() {
+                    habit.completed = false;
+                    await req.user.save()
+                }, milliseconds_to_midnight)
+
                 console.log(habit.completed);
                 req.user.save(function(err) {
                     res.redirect(req.get("referer"));
@@ -145,7 +181,6 @@ function incompleteHabit(req, res, next) {
         role.habits.forEach(function(habit) {
             const idx = role.habits.findIndex(habit => habit.id === req.params.id);
             if(habit.id === req.params.id) {
-                roleID = role.id;
                 console.log(req.path);
                 habit.completed = false;
                 req.user.save(function(err) {
