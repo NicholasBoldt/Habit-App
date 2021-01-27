@@ -5,38 +5,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Index</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-    crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel='stylesheet' href='/stylesheets/style.css' />
-
 </head>
 
 <body>
   <!-- Add login UI here -->
   <% if (user) { %>
-  <nav class="navbar navbar-dark bg-dark mb-3">
-    <div class="container-fluid">
-      <a href="#" class="navbar-brand mr-3">Habit App</a>
-      <div class="navbar-nav">
-        <a href="/users" class="nav-item nav-link active">Home</a>
+  <header class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper cyan darken-4">
+        <a href="/users"class="left brand-logo">&nbsp;&nbsp;Habit App</a>
+        <ul class="right">
+          <li><a href="/users">Home</a></li>
+          <li><a href="/users/habits">Habits</a></li>
+          <li><a href="/users/tasks">Tasks</a></li>
+          <li><a href="/users/all">All</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
       </div>
-      <div class="navbar-nav">
-        <a href="/users/habits" class="nav-item nav-link">Habits</a>
-      </div>
-      <div class="navbar-nav">
-        <a href="/users/tasks" class="nav-item nav-link">Tasks</a>
-      </div>
-      <div class="navbar-nav">
-        <a href="/users/all" class="nav-item nav-link">All</a>
-      </div>
-      <div class="navbar-nav ml-auto">
-        <a href="/logout" class="nav-item nav-link">Logout</a>
-      </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
+
+
   User: <%= user.name %> <br>
   <div class=container>
     <h2 class= "text-center"><u>Roles</u></h2>
@@ -84,6 +76,8 @@
     </div>
   </div>
   <% } %>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 
 </html>
