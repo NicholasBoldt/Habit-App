@@ -1,6 +1,6 @@
 # Habit App
 
-Habit App is a role based habit and task manager. The design is based off of the book Atmoic Habits which proposes that outcomes are best reached not through striving towards goals but instead setting acheivable daily habits. 
+Habit App is a role based habit and task manager. The design is based off of the book Atomic Habits which proposes that outcomes are best reached not through striving towards goals but instead setting acheivable daily habits. 
 
 Identity(Role)->Process(Habits)->Outcomes(Goals)
 

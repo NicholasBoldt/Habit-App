@@ -142,7 +142,6 @@ function editHabit(req, res, next) {
 }
 
 function completeHabit(req, res, next) {
-    let roleID = "";
     req.user.roles.forEach(function(role) {
         role.habits.forEach(function(habit) {
             const idx = role.habits.findIndex(habit => habit.id === req.params.id);
@@ -176,7 +175,6 @@ function completeHabit(req, res, next) {
 }
 
 function incompleteHabit(req, res, next) {
-    let roleID = "";
     req.user.roles.forEach(function(role) {
         role.habits.forEach(function(habit) {
             const idx = role.habits.findIndex(habit => habit.id === req.params.id);

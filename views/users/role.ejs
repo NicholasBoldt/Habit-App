@@ -40,7 +40,7 @@
                 <h3>Habits</h3>
                 <% role.habits.forEach(function(habit) { %>
                 <ul class="list-group list-group-flush">
-                    <a href="/users/habit/<%= habit._id %>" class="list-group-item list-group-item-action d-flex justify-content-around"> 
+                    <a href="/users/habit/<%= habit._id %>" class="list-group-item list-group-item-action d-flex justify-content-between"> 
                         <%= habit.name %>: <%= habit.amount %> <%= habit.daily %> 
                         <% if(habit.completed == true) { %>
                         <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT" method="POST">
