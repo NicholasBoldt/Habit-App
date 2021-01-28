@@ -4,53 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-      <nav class="navbar navbar-dark bg-dark mb-3">
-        <div class="container-fluid">
-          <a href="#" class="navbar-brand mr-3">Habit App</a>
-            <div class="navbar-nav">
-              <a href="/users" class="nav-item nav-link">Home</a>
-            </div>
-            <div class="navbar-nav">
-              <a href="/users/habits" class="nav-item nav-link">Habits</a>
-            </div>
-            <div class="navbar-nav">
-              <a href="/users/tasks" class="nav-item nav-link active">Tasks</a>
-            </div>
-            <div class="navbar-nav">
-              <a href="/users/all" class="nav-item nav-link">All</a>
-            </div>
-            <div class="navbar-nav ml-auto">
-              <a href="/logout" class="nav-item nav-link">Logout</a>
-            </div>
-        </div>
-      </nav>
+    <header class="navbar-fixed">
+        <nav>
+          <div class="nav-wrapper teal ">
+            <a href="/users"class="left brand-logo">&nbsp;&nbsp;Habit App</a>
+            <ul class="right">
+              <li><a href="/users">Home</a></li>
+              <li><a href="/users/habits">Habits</a></li>
+              <li><a href="/users/tasks">Tasks</a></li>
+              <li><a href="/users/all">All</a></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </div>
+        </nav>
+    </header>
     <div class="container">
-        <h1 class="text-center"><u>All Tasks</u></h1>
-        <div class="row">
-            <div class="col"></div>
-            <div class="col-sm-12 col-md-6 col-lg-6">
-                <% person.roles.forEach(function(role) { %>
-                <%  if(role.tasks.length > 0 && role.tasks != undefined){ %>
-                <h3><%= role.name %></h3>
-                <%  } %>
-                <% role.tasks.forEach(function(task) { %>
-                <ul class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between"><%= task.name %> <form
-                            action="/users/task/delete/<%= task._id %>?_method=DELETE" class="delete-form" method="POST">
-                            <button type="submit" class="btn btn-secondary btn-sm"> Complete Task</button>
-                        </form>
-                    </a>
-                </ul>
-                <% }); %>
-                <% }); %>
+      <h3 class="center">All Tasks</h3>
+      <div>
+        <% person.roles.forEach(function(role) { %>
+        <%  if(role.tasks.length > 0 && role.tasks != undefined){ %>
+        <h5><%= role.name %></h5>
+        <hr/>
+        <%  } %>
+        <% role.tasks.forEach(function(task) { %>
+        <ul>
+          <li class="row valign-wrapper">
+            <div class="col s8 m8 l9">
+              <%= task.name %>
             </div>
-            <div class="col"></div>
-        </div>
+            <div class="col s4 m4 l3">
+              <form action="/users/task/delete/<%= task._id %>?_method=DELETE" class="delete-form" method="POST">
+                <button type="submit" class="btn grey"> Complete Task</button>
+              </form>
+            </div>
+          </li>
+          <% }); %>
+        </ul>
+        <% }); %>
+      </div>
     </div>
 
 </body>

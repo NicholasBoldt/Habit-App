@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 var habitSchema = new mongoose.Schema({
     name: String,
     amount: String,
-    daily: String,
+    daily: {type: String, default: 'daily'},
     completed: {type: Boolean, default: false},
     completed_dates: [Date], // to calculate streak
 });

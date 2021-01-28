@@ -1,16 +1,12 @@
-/* body {
+body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-} */
-
-/* a {
-  color: #00B7FF;
 }
 
-header {
-  text-align: center;
-} */
+a { 
+    color:teal;
+    text-decoration:none;
+}
 
-/* nav {
-  text-decoration-color: white;
-} */
-
+a:hover, a:focus {
+    text-decoration:underline;
+}
