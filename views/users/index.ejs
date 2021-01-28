@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +14,7 @@
   <% if (user) { %>
   <header class="navbar-fixed">
     <nav>
-      <div class="nav-wrapper cyan darken-4">
+      <div class="nav-wrapper teal ">
         <a href="/users"class="left brand-logo">&nbsp;&nbsp;Habit App</a>
         <ul class="right">
           <li><a href="/users">Home</a></li>
@@ -28,51 +27,41 @@
     </nav>
   </header>
 
-
-  User: <%= user.name %> <br>
-  <div class=container>
-    <h2 class= "text-center"><u>Roles</u></h2>
+  <div class="container">
+    <h3 class="center">Roles</h3>
+    <hr />
+    <ul>
+      <% user.roles.forEach(function(role) { %>
+      <div class="card">
+        <a href="/users/role/<%= role._id %>" class="card-content center">
+          <h5><%= role.name %></h5>
+        </a>
+      </div>
+      <% }) %>
+    </ul>
+    
     <div class="row">
-      <div class="col"></div>
-      <div class="col-sm-12 col-md-6 col-lg-6">
-        <ul class="list-group list-group-flush">
-          <% user.roles.forEach(function(role) { %>
-          <a href="/users/role/<%= role._id %>" class="list-group-item list-group-item-action text-center">
-            <h3><%= role.name %></h3>
-          </a>
-          <% }) %>
-        </ul>
-      <div>
-        <form action="/users" method="POST">
-        <div class="input-group">
-          <input type="text" name="name" required class="form-control">
-          <div class="input-group-append">
-            <button type="submit" class="btn btn-primary">Add Role</button>
-          </div>
+      <form action="/users" method="POST">
+        <div class="col s4">
+          <input placeholder="Enter a New Role" type="text" name="name"> 
         </div>
-        </form>
-      </div>
-      <div>
+        <div class="col s4">
+          <button type="submit" class='btn'>Add Role</button>
+        </div>   
+      </form>
+      <div class="col s4">
         <form action="/users/reset?_method=PUT" method="POST">
-          <button type="submit" class="btn btn-primary btn-block">Reset Habits</button>
+          <button type="submit" class="btn">Reset Habits</button>
         </form>
       </div>
-      </div>
-      <div class="col"></div>
     </div>
   </div>
 
   <% } else { %>
   <div class="container">
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-sm-12 col-md-6 col-lg-6 justify-content-center">
-        <div class="jumbotron mt-5">
-          <h1 class="display-3">Habit App</h1>
-          <a class="btn btn-primary btn-lg" href="/auth/google" role="button">Login with Google</a>
-        </div>
-      </div>
-      <div class="col"></div>
+    <div class="center">
+      <h1>Habit App</h1>
+      <a href="/auth/google" role="button" class="btn">Login with Google</a>
     </div>
   </div>
   <% } %>
