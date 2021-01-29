@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habits</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
@@ -35,20 +36,23 @@
         <div>
           <a href="/users/habit/<%= habit._id %>" class="row valign-wrapper">
             <div class="col s6 m6 l8"><%= habit.name %>: <%= habit.amount %> </div>
+            <div class="col s1 m1 l1">
+              <!-- <i class="material-icons icon-orange">whatshot</i>  -->
+            </div>
             <div class="col s3 m3 l2">
               <% if(habit.completed == true) { %>
               <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT" method="POST">
-                <button type="submit" class="btn"> Complete </button>
+                <button type="submit" class="btn btn-block"> Complete </button>
               </form>
               <% } else { %>
               <form action="/users/habit/complete/<%= habit._id %>?_method=PUT" method="POST">
-                <button type="submit" class="btn grey"> Incomplete </button>
+                <button type="submit" class="btn btn-block grey"> Incomplete </button>
               </form>
               <% }  %>
             </div>
-            <div class="col s3 m3 l2">
+            <div class="col s2 m2 l1">
               <form action="/users/habit/delete/<%= habit._id %>?_method=DELETE" class="delete-form" method="POST">
-                <button type="submit" class="btn red lighten-2"> Delete Habit</button>
+                <button type="submit" class="btn red lighten-2"> Delete</button>
               </form>
             </div>
           </a>

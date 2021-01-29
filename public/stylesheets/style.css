@@ -10,3 +10,11 @@ a {
 a:hover, a:focus {
     text-decoration:underline;
 }
+
+i.icon-orange {
+  color: orange;
+}
+
+.btn-block {
+  width: 100%;
+}

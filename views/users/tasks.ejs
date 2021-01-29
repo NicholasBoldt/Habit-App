@@ -33,10 +33,10 @@
         <% role.tasks.forEach(function(task) { %>
         <ul>
           <li class="row valign-wrapper">
-            <div class="col s8 m8 l9">
+            <div class="col s9 m9 l10">
               <%= task.name %>
             </div>
-            <div class="col s4 m4 l3">
+            <div class="col s3 m3 l2">
               <form action="/users/task/delete/<%= task._id %>?_method=DELETE" class="delete-form" method="POST">
                 <button type="submit" class="btn grey"> Complete Task</button>
               </form>

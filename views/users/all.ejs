@@ -33,19 +33,19 @@
         <% role.habits.forEach(function(habit) { %>
         <div>
           <a href="/users/habit/<%= habit._id %>" class="row valign-wrapper">
-            <div class="col s6 m6 l8"><%= habit.name %>: <%= habit.amount %> </div>
+            <div class="col s7 m7 l8"><%= habit.name %>: <%= habit.amount %> </div>
             <div class="col s3 m3 l2">
               <% if(habit.completed == true) { %>
               <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT" method="POST">
-                <button type="submit" class="btn"> Complete </button>
+                <button type="submit" class="btn btn-block"> Complete </button>
               </form>
               <% } else { %>
               <form action="/users/habit/complete/<%= habit._id %>?_method=PUT" method="POST">
-                <button type="submit" class="btn grey"> Incomplete </button>
+                <button type="submit" class="btn btn-block grey"> Incomplete </button>
               </form>
               <% }  %>
             </div>
-            <div class="col s3 m3 l2">
+            <div class="col s2 m2 l2">
               <form action="/users/habit/delete/<%= habit._id %>?_method=DELETE" class="delete-form" method="POST">
                 <button type="submit" class="btn red lighten-2"> Delete Habit</button>
               </form>
@@ -65,10 +65,10 @@
           <% role.tasks.forEach(function(task) { %>
           <ul>
             <li class="row valign-wrapper">
-              <div class="col s8">
+              <div class="col s9 m9 l10">
                 <%= task.name %>
               </div>
-              <div class="col s4">
+              <div class="col s3 m3 l2">
                 <form action="/users/task/delete/<%= task._id %>?_method=DELETE" class="delete-form" method="POST">
                   <button type="submit" class="btn grey"> Complete Task</button>
                 </form>
