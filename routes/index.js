@@ -27,4 +27,10 @@ router.get('/logout', function(req, res){
   res.redirect('/users');
 });
 
+router.get('/debug', function(req, res){
+  let debugInfo = ""
+  debugInfo += "current server time:" + new Date()
+  res.send(debugInfo)
+});
+
 module.exports = router;
