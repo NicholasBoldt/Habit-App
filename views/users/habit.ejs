@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habit</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
@@ -56,6 +57,19 @@
       <div class="card center col s6">
         <h6>Streak: <%= streak %></h6>
       </div>
+    </div>
+    <div class="row">
+      <ul class="collection with-header">
+        <li class="collection-header"><h5>Completion Log:</h5></li>
+        <% if (habit.completed_dates.length > 0) { %>
+          <% for (let i = habit.completed_dates.length-1; i>=0; i--) { %>
+            <li class="collection-item"><div><i class="material-icons tiny">access_time</i> <%= habit.completed_dates[i] %></div></li>  
+          <% } %>
+        <% } else { %>
+          <li class="collection-item">This activity has never been completed. :(</li>
+        <% } %>
+    </ul>
+
     </div>
     
   
