@@ -39,6 +39,7 @@
             <div class="col s1 m1 l1">
               <!-- <i class="material-icons icon-orange">whatshot</i>  -->
             </div>
+            Streak: <%= calculateStreak(habit.completed_dates) %>
             <div class="col s3 m3 l2">
               <% if(habit.completed == true) { %>
               <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT" method="POST">

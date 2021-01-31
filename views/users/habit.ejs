@@ -55,7 +55,7 @@
         <h6>Days Completed: <%= habit.completed_dates.length %></h6>
       </div>
       <div class="card center col s6">
-        <h6>Streak: <%= streak %></h6>
+        <h6>Streak: <%= calculateStreak(habit.completed_dates) %></h6>
       </div>
     </div>
     <div class="row">
