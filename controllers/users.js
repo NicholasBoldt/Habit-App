@@ -99,22 +99,21 @@ function habitDetail(req, res, next) {
             if(habit.id == req.params.id) {
                 res.render('users/habit', {
                     role, 
-                    habit, 
-                    streak: calculateStreak(habit.completed_dates)
+                    habit,
+                    calculateStreak: calculateStreak,
                 });
             }
         });
     });
 }
 
+// calculate streak if given an array of dates in chronological order - ie., [5 days ago, 2 days ago, today]
 function calculateStreak(dates) {
     let current_date = new Date()
     current_date.setHours(0,0,0,0)
     let streak = 0
     for (let i = dates.length -1; i >= 0; i--) {
-        console.log(i, dates[i], current_date)
         while(i >= 0 && dates[i].getTime() == current_date.getTime()) {
-            console.log("match at index",i)
             streak++
             i--
             current_date.setDate(current_date.getDate() - 1)
@@ -149,21 +148,15 @@ function completeHabit(req, res, next) {
                 console.log(habit.completed);
                 habit.completed = true;
 
-                // Add today's date to a list of completed_dates (if today isn't already there)
+                // Add today's date to this habit's completed_dates (if today isn't already there)
                 // warning: these dates are all local server time. ideal:UTC
+                // ideally, you'd ask the user for their timezone and store dates at usertime midnight for resetting correctly
                 let today = new Date()
                 today.setHours(0,0,0,0)
-                date_exists_in_log = habit.completed_dates.some(date_in_log => date_in_log.getTime() == today.getTime())
-                if (!date_exists_in_log) {
+                today_exists_in_log = habit.completed_dates.some(date_in_log => date_in_log.getTime() == today.getTime())
+                if (!today_exists_in_log) {
                     habit.completed_dates.push(today);
                 }
-                // Reset "completion" flag to false at midnight
-                let milliseconds_to_midnight = (new Date()).setHours(24,0,0,0) - new Date()
-                console.log(milliseconds_to_midnight)
-                setTimeout(async function() {
-                    habit.completed = false;
-                    await req.user.save()
-                }, milliseconds_to_midnight)
 
                 console.log(habit.completed);
                 req.user.save(function(err) {
@@ -204,7 +197,10 @@ function resetHabits(req, res, next) {
 
 function showHabits(req, res, next) {
     let person = req.user;
-    res.render('users/habits', {person});
+    res.render('users/habits', {
+        person,
+        calculateStreak: calculateStreak,
+    });
 }
 
 
@@ -244,5 +240,8 @@ function showTasks(req, res, next) {
 
 function showAll(req, res, next) {
     let person = req.user;
-    res.render('users/all', {person});
+    res.render('users/all', {
+        person,
+        calculateStreak: calculateStreak,
+    });
 }
