@@ -36,11 +36,16 @@
         <div>
           <a href="/users/habit/<%= habit._id %>" class="row valign-wrapper">
             <div class="col s6 m6 l8"><%= habit.name %>: <%= habit.amount %> </div>
-            <div class="col s1 m1 l1">
-              <!-- <i class="material-icons icon-orange">whatshot</i>  -->
-            </div>
-            Streak: <%= calculateStreak(habit.completed_dates) %>
-            <div class="col s3 m3 l2">
+            <% if(calculateStreak(habit.completed_dates) > 0) { %>
+              <div class="streak-active col s1 m1 l1 valign-wrapper">
+                <i class="material-icons">whatshot</i>  <%= calculateStreak(habit.completed_dates) %>
+              </div>
+            <% } else { %>
+              <div class="streak-inactive col s1 m1 l1 valign-wrapper">
+                <i class="material-icons">whatshot</i>  <%= calculateStreak(habit.completed_dates) %>
+              </div>
+            <% } %>
+            <div class="col s3 m3 l2 ">
               <% if(habit.completed == true) { %>
               <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT" method="POST">
                 <button type="submit" class="btn btn-block"> Complete </button>

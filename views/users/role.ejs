@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Role</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
@@ -12,7 +13,7 @@
 <body>
     <header class="navbar-fixed">
         <nav>
-          <div class="nav-wrapper teal ">
+          <div class="nav-wrapper teal">
             <a href="/users"class="left brand-logo">&nbsp;&nbsp;Habit App</a>
             <ul class="right">
               <li><a href="/users">Home</a></li>
@@ -33,7 +34,16 @@
         <% role.habits.forEach(function(habit) { %>
         <div>
             <a href="/users/habit/<%= habit._id %>" class="row valign-wrapper">
-                <div class="col s7 m7 l8"><%= habit.name %>: <%= habit.amount %> </div>
+                <div class="col s6 m6 l8"><%= habit.name %>: <%= habit.amount %> </div>
+                <% if(calculateStreak(habit.completed_dates) > 0) { %>
+                    <div class="streak-active col s1 m1 l1 valign-wrapper">
+                      <i class="material-icons">whatshot</i>  <%= calculateStreak(habit.completed_dates) %>
+                    </div>
+                  <% } else { %>
+                    <div class="streak-inactive col s1 m1 l1 valign-wrapper">
+                      <i class="material-icons">whatshot</i>  <%= calculateStreak(habit.completed_dates) %>
+                    </div>
+                  <% } %>
                 <div class="col s3 m3 l2">
                     <% if(habit.completed == true) { %>
                     <form action="/users/habit/incomplete/<%= habit._id %>?_method=PUT" method="POST">
