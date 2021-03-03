@@ -13,7 +13,9 @@ If you set your habits around an identity you desire as those habits become a pa
 An example would be someone learning the guitar might not feel like a guitarist but after practcing everyday over a period of time that identity might start to solidfy itself making the process of learning and expanding knowledge of the guitar more natural. 
 
 ### Screenshots
-![ScreenShot](https://raw.github.com/nicholasboldt/habit-app/main/./screenshots/RolesPage)
+![ScreenShot](https://raw.githubusercontent.com/NicholasBoldt/Habit-App/main/screenshots/RolesPage.png)
+![ScreenShot](https://raw.githubusercontent.com/NicholasBoldt/Habit-App/main/screenshots/RolesDetailedPage.png)
+![ScreenShot](https://raw.githubusercontent.com/NicholasBoldt/Habit-App/main/screenshots/AddHabits.png)
 
 ### Features
 - Oauth
