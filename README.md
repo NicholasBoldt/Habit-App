@@ -14,7 +14,7 @@ An example would be someone learning the guitar might not feel like a guitarist 
 
 ### Screenshots
 ![ScreenShot](https://raw.githubusercontent.com/NicholasBoldt/Habit-App/main/screenshots/RolesPage.png)
-![ScreenShot](https://raw.githubusercontent.com/NicholasBoldt/Habit-App/main/screenshots/RolesDetailedPage.png)
+![ScreenShot](https://raw.githubusercontent.com/NicholasBoldt/Habit-App/main/screenshots/RoleDetailedPage.png)
 ![ScreenShot](https://raw.githubusercontent.com/NicholasBoldt/Habit-App/main/screenshots/AddHabits.png)
 
 ### Features
