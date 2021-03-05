@@ -2,6 +2,7 @@
 
 ## This has been moved to react as part of a new project: https://github.com/NicholasBoldt/Life-Balance-App
 
+
 ## Description
 
 Habit App is a role based habit and task manager. The design is based off of the book Atomic Habits which proposes that outcomes are best reached not through striving towards goals but instead setting acheivable daily habits. 
@@ -22,6 +23,9 @@ An example would be someone learning the guitar might not feel like a guitarist 
 - Create Roles that suit the areas of your life. Each Role will have habits(daily) and tasks(one time). 
 - Streaks that show how many days in a row
 - Check off lists
+
+## Try it
+http://habit-role-app.herokuapp.com/
 
 ## Technologies Used:
 - HTML
